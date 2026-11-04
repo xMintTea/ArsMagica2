@@ -42,7 +42,13 @@ public class EntityAIShadowstep extends AIAnimation{
 		return cooldownTicks-- <= 0;
 	}
 
-	@Override
+    @Override
+    public boolean shouldExecute(){
+        EntityLiving living = getEntity();
+        return living != null && living.getAttackTarget() != null;
+    }
+
+    @Override
 	public void resetTask(){
 		cooldownTicks = 30;
 		EntityEnderGuardian guardian = getEntity();

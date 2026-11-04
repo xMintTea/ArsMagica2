@@ -49,7 +49,13 @@ public class EntityAIStatic extends AIAnimation{
 		return 107;
 	}
 
-	@Override
+    @Override
+    public boolean shouldExecute(){
+        EntityLiving living = getEntity();
+        return living != null && living.getAttackTarget() != null;
+    }
+
+    @Override
 	public void resetTask(){
 		cooldownTicks = 50;
 		doStrike();

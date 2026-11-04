@@ -44,37 +44,38 @@ public class ItemLightningCharm extends ArsMagicaItem{
 		return par1ItemStack;
 	}
 
-	private void attractItems(World world, Entity ent){
-		double distance = 16;
-		int hDist = 5;
-		List<Entity> entities = world.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(ent.posX - distance, ent.posY - hDist, ent.posZ - distance, ent.posX + distance, ent.posY + hDist, ent.posZ + distance));
-		for (Entity e : entities){
-			EntityItem item = (EntityItem)e;
-			if (item.age < 10){
-				continue;
-			}
-			AMVector3 movement = MathUtilities.GetMovementVectorBetweenPoints(new AMVector3(e), new AMVector3(ent.posX, ent.posY, ent.posZ));
+    private void attractItems(World world, Entity ent) {
+        double distance = 16;
+        int hDist = 5;
+        List<EntityItem> entities = world.getEntitiesWithinAABB(
+            EntityItem.class,
+            AxisAlignedBB.getBoundingBox(
+                ent.posX - distance, ent.posY - hDist, ent.posZ - distance,
+                ent.posX + distance, ent.posY + hDist, ent.posZ + distance));
 
-			if (!world.isRemote){
-				float factor = 0.35f;
-				if (movement.y > 0) movement.y = 0;
-				double x = -(movement.x * factor);
-				double y = -(movement.y * factor);
-				double z = -(movement.z * factor);
-				e.addVelocity(x, y, z);
-				item.delayBeforeCanPickup = 0;
-				if (Math.abs(e.motionX) > Math.abs(x * 2)){
-					e.motionX = x * (e.motionX / e.motionX);
-				}
-				if (Math.abs(e.motionY) > Math.abs(y * 2)){
-					e.motionY = y * (e.motionY / e.motionY);
-				}
-				if (Math.abs(e.motionZ) > Math.abs(z * 2)){
-					e.motionZ = z * (e.motionZ / e.motionZ);
-				}
-			}
-		}
-	}
+        for (EntityItem item : entities) {
+            if (item.age < 10) continue;
+
+            AMVector3 movement = MathUtilities.GetMovementVectorBetweenPoints(
+                new AMVector3(item),
+                new AMVector3(ent.posX, ent.posY, ent.posZ));
+
+            if (!world.isRemote) {
+                float factor = 0.35f;
+                if (movement.y > 0) movement.y = 0;
+                double x = -(movement.x * factor);
+                double y = -(movement.y * factor);
+                double z = -(movement.z * factor);
+
+                item.addVelocity(x, y, z);
+                item.delayBeforeCanPickup = 0;
+
+                if (Math.abs(item.motionX) > Math.abs(x * 2)) item.motionX = x * Math.signum(item.motionX);
+                if (Math.abs(item.motionY) > Math.abs(y * 2)) item.motionY = y * Math.signum(item.motionY);
+                if (Math.abs(item.motionZ) > Math.abs(z * 2)) item.motionZ = z * Math.signum(item.motionZ);
+            }
+        }
+    }
 
 	@Override
 	public void onUpdate(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5){

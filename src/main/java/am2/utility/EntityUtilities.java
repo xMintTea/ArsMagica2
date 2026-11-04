@@ -112,7 +112,7 @@ public class EntityUtilities{
 				float speed = entityliving.getAIMoveSpeed();
 				if (speed <= 0) speed = 1.0f;
 				entityliving.tasks.addTask(3, new EntityAIAttackOnCollide(entityliving, EntityMob.class, speed, true));
-				entityliving.tasks.addTask(3, new EntityAIAttackOnCollide(entityliving, IMob.class, speed, true));
+				//entityliving.tasks.addTask(3, new EntityAIAttackOnCollide(entityliving, IMob.class, speed, true));
 				entityliving.tasks.addTask(3, new EntityAIAttackOnCollide(entityliving, EntitySlime.class, speed, true));
 			}
 
@@ -343,23 +343,23 @@ public class EntityUtilities{
 		// doing it like this does not update experienceTotal
 		// we therefore need to go and calculate an effective total ourselves
 		int effectiveTotal = getXPFromLevel(player.experienceLevel) + (int)(player.experience * (float)xpBarCap(player.experienceLevel));
-		
+
 		// since we already calculate the player's total XP here,
 		// we may as well do the zero check and pass the result (how much was actually deducted) back
 		// there's no sense in duplicating work
 		int removedXP = effectiveTotal >= amount ? amount : effectiveTotal;
-		
+
 		int newTotal = effectiveTotal - amount;
 		if(newTotal < 0)
 			newTotal = 0;
-		
+
 		player.experience = 0.0F;
 		player.experienceLevel = 0;
 		player.experienceTotal -= removedXP;
 		if(player.experienceTotal < 0)
 			player.experienceTotal = 0;
 		player.addExperience(newTotal);
-		
+
 		return removedXP;
 	}
 

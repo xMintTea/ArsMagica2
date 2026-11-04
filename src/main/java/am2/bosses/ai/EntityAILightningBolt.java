@@ -45,7 +45,13 @@ public class EntityAILightningBolt extends AIAnimation{
 		return 15;
 	}
 
-	@Override
+    @Override
+    public boolean shouldExecute(){
+        EntityLiving living = getEntity();
+        return living != null && living.getAttackTarget() != null;
+    }
+
+    @Override
 	public void resetTask(){
 		cooldownTicks = 3;
 		super.resetTask();

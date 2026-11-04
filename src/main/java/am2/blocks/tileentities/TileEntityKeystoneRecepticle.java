@@ -30,6 +30,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class TileEntityKeystoneRecepticle extends TileEntityAMPower implements IInventory, IMultiblockStructureController, IKeystoneLockable{
@@ -163,8 +164,7 @@ public class TileEntityKeystoneRecepticle extends TileEntityAMPower implements I
 		super.updateEntity();
 
 		AxisAlignedBB bb = AxisAlignedBB.getBoundingBox(xCoord + 0.3, yCoord - 3, zCoord + 0.3, xCoord + 0.7, yCoord, zCoord + 0.7);
-		ArrayList<Entity> entities = (ArrayList<Entity>)worldObj.getEntitiesWithinAABB(EntityLivingBase.class, bb);
-
+        List<EntityLivingBase> entities = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, bb);
 		if (this.isActive){
 			surroundingCheckTicks--;
 			if (surroundingCheckTicks <= 0){

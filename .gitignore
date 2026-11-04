@@ -1,7 +1,91 @@
-#ant stuff
+# ==========================================
+# Gradle & Build System
+# ==========================================
+.gradle/
+/build/
+/out/
+/out/
+gradle-app.setting
+*.lock
+version.properties
+
+# Исключения для важных файлов сборки (НЕ игнорировать!)
+!build.gradle
+!build.gradle.kts
+!settings.gradle
+!settings.gradle.kts
+!gradlew
+!gradlew.bat
+!gradle.properties
+
+# ==========================================
+# IDEs & Editors
+# ==========================================
+# IntelliJ IDEA
+/.idea/
+*.iml
+*.ipr
+*.iws
+
+# Eclipse
+/.settings/
+/.classpath
+/.project
+.factorypath
+
+# VS Code
+/.vscode/
+
+# Vim
+*~
+
+# ==========================================
+# Minecraft / Forge Dev Environment
+# ==========================================
+# Папки запуска и логов
+/run*/
+/logs/
+/crash-reports/
+/debug/
+
+# Файлы настроек и мира
+/config/
+/saves/
+/options.txt
+/usernamecache.json
+/servers.dat
+/usercache.json
+/layout.json
+
+# Файлы сервера
+/banned-ips.json
+/banned-players.json
+/eula.txt
+/ops.json
+/server.properties
+/whitelist.json
+
+# ==========================================
+# GTNH / RFG специфичные файлы
+# ==========================================
+addon.local.gradle
+addon.local.gradle.kts
+addon.late.local.gradle
+addon.late.local.gradle.kts
+
+# ==========================================
+# Ant & Прочее
+# ==========================================
 /bin/
 /download/
-#Remove OS generated garbage
+/ui/
+/eclipse/
+/.metadata/
+*.orig
+
+# ==========================================
+# OS Generated Garbage (Mac & Windows)
+# ==========================================
 */.DS_Store
 .DS_Store
 .DS_Store?
@@ -10,38 +94,3 @@
 Icon?
 ehthumbs.db
 Thumbs.db
-#gradle stuff
-/.gradle
-/build/
-/run*/
-/ui/
-gradle-app.setting
-#IDEA files from Gradle
-.idea/
-/*.iml
-/*.ipr
-/*.iws
-#Vim backups
-*~
-#manual version override
-version.properties
-#eclipse stuffs
-/.classpath
-/.project
-/.settings/
-/eclipse/
-/debug/
-*.lock
-/.metadata/
-/config/
-/logs/
-options.txt
-/saves/
-/out
-#git stuff
-*.orig
-build.gradle
-CREDITS-fml.txt
-LICENSE-fml.txt
-MinecraftForge-Credits.txt
-MinecraftForge-License.txt

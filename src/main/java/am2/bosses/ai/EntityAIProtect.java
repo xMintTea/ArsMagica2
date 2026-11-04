@@ -4,6 +4,7 @@ import am2.bosses.BossActions;
 import am2.bosses.EntityEnderGuardian;
 import am2.spell.SpellHelper;
 import am2.utility.NPCSpells;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import thehippomaster.AnimationAPI.AIAnimation;
 import thehippomaster.AnimationAPI.IAnimatedEntity;
@@ -43,7 +44,13 @@ public class EntityAIProtect extends AIAnimation{
 		return cooldownTicks-- <= 0;
 	}
 
-	@Override
+    @Override
+    public boolean shouldExecute(){
+        EntityLiving living = getEntity();
+        return living != null && living.getAttackTarget() != null;
+    }
+
+    @Override
 	public void resetTask(){
 		cooldownTicks = 20;
 		EntityLivingBase ent = getEntity();
