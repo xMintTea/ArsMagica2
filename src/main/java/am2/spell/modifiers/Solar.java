@@ -51,9 +51,9 @@ public class Solar implements ISpellModifier{
 
 	private float modifyValueOnInverseLunarCycle(World world, float value){
 		long boundedTime = world.provider.getWorldTime() % 24000;
-		int phase = 8 - (8 - world.provider.getMoonPhase(world.getWorldInfo().getWorldTime()));
+
 		if (boundedTime > 23500 || boundedTime < 12500){
-			return value + (phase / 2);
+			return value + 4 - Math.abs(4 - world.provider.getMoonPhase(world.getWorldInfo().getWorldTime()));
 		}
 		return Math.abs(value - 1);
 	}
