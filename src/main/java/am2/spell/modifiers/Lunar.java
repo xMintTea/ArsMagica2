@@ -51,9 +51,8 @@ public class Lunar implements ISpellModifier{
 
 	private float modifyValueOnLunarCycle(World world, float value){
 		long boundedTime = world.provider.getWorldTime() % 24000;
-		int phase = 8 - world.provider.getMoonPhase(world.getWorldInfo().getWorldTime());
 		if (boundedTime > 12500 && boundedTime < 23500){
-			return value + (phase / 2);
+			return value + Math.abs(4 - world.provider.getMoonPhase(world.getWorldInfo().getWorldTime()));
 		}
 		return Math.abs(value - 1);
 	}
