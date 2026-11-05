@@ -43,9 +43,8 @@ public class Solar implements ISpellModifier{
 
 	private float modifyValueOnTime(World world, float value){
 		long x = world.provider.getWorldTime() % 24000;
-		float multiplierFromTime = (float)(Math.cos(((x / 3800f) * (x / 24000f) - 13000f) * (180f / Math.PI)) * 1.5f) + 1;
-		if (multiplierFromTime < 0)
-			multiplierFromTime *= -0.5f;
+		float multiplierFromTime = (float)(1 + 0.5 * Math.cos((2 * Math.PI * (x - 6000)) / 24000));
+
 		return value * multiplierFromTime;
 	}
 
