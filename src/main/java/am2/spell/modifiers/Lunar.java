@@ -43,10 +43,11 @@ public class Lunar implements ISpellModifier{
 
 	private float modifyValueOnTime(World world, float value){
 		long x = world.provider.getWorldTime() % 24000;
-		float multiplierFromTime = (float)(Math.sin(((x / 4600f) * (x / 21000f) - 900f) * (180f / Math.PI)) * 3f) + 1;
-		if (multiplierFromTime < 0)
-			multiplierFromTime *= -0.5f;
-		return value * multiplierFromTime;
+        float moonPhase = world.provider.getMoonPhase(world.getWorldInfo().getWorldTime());
+        float phaseMult = (float)(0.5 + 1.5 * Math.abs(4 - moonPhase) / 4.0) ;
+		float multiplierFromTime = (float)(1 - 0.5 * Math.cos((2 * Math.PI * (x - 6000)) / 24000));
+
+        return value * multiplierFromTime * phaseMult;
 	}
 
 	private float modifyValueOnLunarCycle(World world, float value){
