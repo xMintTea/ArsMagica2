@@ -104,7 +104,7 @@ public class GuiSpellCustomization extends GuiContainer{
 
 		String suggestion = ((ContainerSpellCustomization)this.inventorySlots).getInitialSuggestedName();
 		spellName.setText(suggestion);
-		if (!suggestion.equals("")){
+		if (!suggestion.isEmpty()){
 			curName = suggestion;
 			((ContainerSpellCustomization)this.inventorySlots).setNameAndIndex(curName, curIndex);
 		}
